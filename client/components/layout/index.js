@@ -18,6 +18,9 @@ const theme = extendTheme({
       100: "#d53f8c",
      
     },
+    blue: {
+      1000: 'rgb(7, 48, 93);'
+    }
   },
 })
 

@@ -21,10 +21,6 @@ import {
   import slug from 'slug'
 
 
-
-  
-  
-
  const QuestionSummary = ({
     id,
     title,
@@ -102,7 +98,11 @@ import {
             {children}
           </chakra.p>
           <chakra.p fontFamily={'Work Sans'} fontWeight={'bold'} fontSize={14}>
+          <Link href="/users/[user]" as={`/users/${author.username}`}>
+            <a>
             {author.username}
+            </a>
+          </Link>
             <chakra.span
               fontFamily={'Inter'}
               fontWeight={'medium'}
@@ -122,6 +122,8 @@ import {
             ))}
           </chakra.p>
         </Flex>
+        <Link href="/users/[user]" as={`/users/${author.username}`}>
+            <a>
         <Avatar
           src={`https://secure.gravatar.com/avatar/${author.id}?s=32&d=identicon`}
           alt={author.username}
@@ -130,6 +132,8 @@ import {
           alignSelf={'center'}
           m={{ base: '0 0 35px 0', md: '0 0 0 50px' }}
         />
+         </a>
+          </Link>
       </Flex>
       
         </SimpleGrid>

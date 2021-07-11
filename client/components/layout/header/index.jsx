@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react'
 //import Link from 'next/link'
 import cn from 'classnames'
-
+import styles from './header.module.css'
 import useComponentVisible from '../../../hooks/useComponentVisible'
 import useWindowSize from '../../../hooks/useWindowSize'
 import CONST from '../../../constants'
@@ -62,7 +62,8 @@ const Header = ({ className, ...props }) =>  {
     }
   }, [size])
   return (
-    <>
+    <header className={cn(styles.header, className)} {...props}>
+      
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
@@ -73,7 +74,7 @@ const Header = ({ className, ...props }) =>  {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box>Logo</Box>
+            <Box> <Logo /></Box>
             <HStack
               as={'nav'}
               spacing={4}
@@ -125,6 +126,7 @@ const Header = ({ className, ...props }) =>  {
                   fontSize={'sm'}
                   fontWeight={400}
                   variant={'link'}
+                  
                   onClick={() => handleComponentVisible(true, 'login')}>
                   Sign In
                 </Button>
@@ -133,10 +135,10 @@ const Header = ({ className, ...props }) =>  {
                   fontSize={'sm'}
                   fontWeight={600}
                   color={'white'}
-                  bg={'pink.400'}
+                  bg={'blue.900'}
                   onClick={() => handleComponentVisible(true, 'signup')}
                   _hover={{
-                    bg: 'pink.300',
+                    bg: 'blue.800',
                   }}>
                   Sign Up
                 </Button>
@@ -160,7 +162,8 @@ const Header = ({ className, ...props }) =>  {
         ) : null}
       </Box>
 
-      </>
+      <div ref={ref}>{isComponentVisible && <NavigationDropdown />}</div>
+    </header>
     
   );
 }

@@ -12,6 +12,7 @@ import PageTitle from '../components/page-title'
 import ButtonGroup from '../components/button-group'
 import { Spinner } from '../components/icons'
 import QuestionSummary from '../components/question/questions-replacement/index.tsx'
+
 const HomePage = () => {
   const router = useRouter()
 
@@ -52,6 +53,7 @@ const HomePage = () => {
   }
 
   return (
+    
     <Layout>
       <Head>
         <title>

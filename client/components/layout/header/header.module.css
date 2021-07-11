@@ -98,3 +98,8 @@
     border-right: 1px solid var(--black-200);
   }
 }
+
+
+.blue-btn {
+  background-color: rgb(7, 48, 93);
+}
