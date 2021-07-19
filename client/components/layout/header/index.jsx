@@ -1,15 +1,15 @@
-import React, { useEffect, useContext } from 'react'
-//import Link from 'next/link'
-import cn from 'classnames'
-import styles from './header.module.css'
-import useComponentVisible from '../../../hooks/useComponentVisible'
-import useWindowSize from '../../../hooks/useWindowSize'
-import CONST from '../../../constants'
-import ModalContext from '../../../store/modal'
-import { AuthContext } from '../../../store/auth'
-import { ColorModeSwitcher } from "../../color-mode-switch/index"
-import NavigationDropdown from '../../navigation-dropdown'
-import { Logo } from '../../icons'
+import React, { useEffect, useContext, useState } from 'react';
+import NextLink from 'next/link'
+import cn from 'classnames';
+import styles from './header.module.css';
+import useComponentVisible from '../../../hooks/useComponentVisible';
+import useWindowSize from '../../../hooks/useWindowSize';
+import CONST from '../../../constants';
+import ModalContext from '../../../store/modal';
+import { AuthContext } from '../../../store/auth';
+import { ColorModeSwitcher } from '../../color-mode-switch/index';
+import NavigationDropdown from '../../navigation-dropdown';
+import { Logo } from '../../icons';
 import {
   Box,
   Flex,
@@ -45,36 +45,37 @@ const NavLink = ({ children }, { children: ReactNode }) => (
   </Link>
 );
 
-const Header = ({ className, ...props }) =>  {
+const Header = ({ className, ...props }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { handleComponentVisible } = useContext(ModalContext)
-  const { isAuthenticated, authState, logout } = useContext(AuthContext)
+  const { handleComponentVisible } = useContext(ModalContext);
+  const { isAuthenticated, authState, logout } = useContext(AuthContext);
   const {
     ref,
     toggleRef,
     isComponentVisible,
-    setIsComponentVisible
-  } = useComponentVisible(false)
-  const size = useWindowSize()
+    setIsComponentVisible,
+  } = useComponentVisible(false);
+  const size = useWindowSize();
   useEffect(() => {
     if (size.width > CONST.MOBILE_SIZE) {
-      setIsComponentVisible(false)
+      setIsComponentVisible(false);
     }
-  }, [size])
+  }, [size]);
+
   return (
     <header className={cn(styles.header, className)} {...props}>
-      
+
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            icon={isOpen ? <CloseIcon/> : <HamburgerIcon/>}
             aria-label={'Open Menu'}
             display={{ md: !isOpen ? 'none' : 'inherit' }}
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box> <Logo /></Box>
+            <Box> <Logo/></Box>
             <HStack
               as={'nav'}
               spacing={4}
@@ -84,71 +85,69 @@ const Header = ({ className, ...props }) =>  {
               ))}
             </HStack>
           </HStack>
-         
-                 
+
+
           <Flex alignItems={'center'}>
-           
-            
             <Menu>
-            {isAuthenticated() ? (
-              <>
-              <MenuButton
-                as={Button}
-                rounded={'full'}
-                variant={'link'}
-                cursor={'pointer'}>
-                <Avatar
-                  size={'sm'}
-                  src={`https://secure.gravatar.com/avatar/${authState.userInfo}?s=32&d=identicon`}
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem> 
-                  <Link
-                    href="/users/[user]"
-                    as={`/users/${authState.userInfo.username}`}>
-                    My Account
-                  </Link>
-                </MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
-              </MenuList>
-              </>
+              {isAuthenticated() ? (
+                <>
+                  <MenuButton
+                    as={Button}
+                    rounded={'full'}
+                    variant={'link'}
+                    cursor={'pointer'}>
+                    <Avatar
+                      size={'sm'}
+                      src={`https://secure.gravatar.com/avatar/${authState.userInfo}?s=32&d=identicon`}
+                    />
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem>
+                      <Link
+                        href={`/users/${authState.userInfo.username}`}
+                        as={NextLink}>
+                        My Account
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>Link 2</MenuItem>
+                    <MenuDivider/>
+                    <MenuItem>Link 3</MenuItem>
+                  </MenuList>
+                </>
               ) : (
                 <Stack
-                flex={{ base: 1, md: 0 }}
-                justify={'flex-end'}
-                direction={'row'}
-                spacing={6}>
-                <Button
-                  as={'a'}
-                  fontSize={'sm'}
-                  fontWeight={400}
-                  variant={'link'}
-                  
-                  onClick={() => handleComponentVisible(true, 'login')}>
-                  Sign In
-                </Button>
-                <Button
-                  display={{ base: 'none', md: 'inline-flex' }}
-                  fontSize={'sm'}
-                  fontWeight={600}
-                  color={'white'}
-                  bg={'blue.900'}
-                  onClick={() => handleComponentVisible(true, 'signup')}
-                  _hover={{
-                    bg: 'blue.800',
-                  }}>
-                  Sign Up
-                </Button>
-              </Stack>
-            )}
-            <ColorModeSwitcher justifySelf="flex-end" />
+                  flex={{ base: 1, md: 0 }}
+                  justify={'flex-end'}
+                  direction={'row'}
+                  spacing={6}>
+                  <Button
+                    as={'a'}
+                    fontSize={'sm'}
+                    fontWeight={400}
+                    variant={'link'}
+
+                    onClick={() => handleComponentVisible(true, 'login')}>
+                    Sign In
+                  </Button>
+                  <Button
+                    display={{ base: 'none', md: 'inline-flex' }}
+                    fontSize={'sm'}
+                    fontWeight={600}
+                    color={'white'}
+                    bg={'blue.900'}
+                    onClick={() => handleComponentVisible(true, 'signup')}
+                    _hover={{
+                      bg: 'blue.800',
+                    }}>
+                    Sign Up
+                  </Button>
+                </Stack>
+              )}
+              <ColorModeSwitcher justifySelf="flex-end"/>
             </Menu>
           </Flex>
-          
-         
+
+
         </Flex>
 
         {isOpen ? (
@@ -162,10 +161,10 @@ const Header = ({ className, ...props }) =>  {
         ) : null}
       </Box>
 
-      <div ref={ref}>{isComponentVisible && <NavigationDropdown />}</div>
+      <div ref={ref}>{isComponentVisible && <NavigationDropdown/>}</div>
     </header>
-    
-  );
-}
 
-export default Header
+  );
+};
+
+export default Header;
