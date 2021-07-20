@@ -109,7 +109,7 @@ const Header = ({ className, ...props }) => {
                         My Account
                       </Link>
                     </MenuItem>
-                    <MenuItem>Link 2</MenuItem>
+                    <MenuItem onClick={() => logout()}>Logout</MenuItem>
                     <MenuDivider/>
                     <MenuItem>Link 3</MenuItem>
                   </MenuList>
