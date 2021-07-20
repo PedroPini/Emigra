@@ -27,11 +27,12 @@ const SignupForm = () => {
           const { token, expiresAt, userInfo } = data
           setAuthState({ token, expiresAt, userInfo })
           resetForm({})
+          setLoading(false)
           setIsComponentVisible(false)
         } catch (error) {
           setStatus(error.response.data.message)
+          setLoading(false)
         }
-        setLoading(false)
       }}
       validationSchema={Yup.object({
         username: Yup.string()
