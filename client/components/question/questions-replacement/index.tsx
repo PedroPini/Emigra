@@ -15,6 +15,7 @@ import {
     SimpleGrid,
     SpaceProps,
     Heading,
+    TagLabel,
     useColorModeValue,
   } from '@chakra-ui/react';
   
@@ -97,7 +98,7 @@ import {
             pb={4}>
             {children}
           </chakra.p>
-          <chakra.p fontFamily={'Work Sans'} fontWeight={'bold'} fontSize={14}>
+          <chakra.span fontFamily={'Work Sans'} fontWeight={'bold'} fontSize={14}>
           <Link href="/users/[user]" as={`/users/${author.username}`}>
             <a>
             {author.username}
@@ -112,15 +113,19 @@ import {
                 addSuffix: true
               })}
             </chakra.span>
+            <HStack spacing={4} mt={1}>
             {tags.map((tag) => (
-              <HStack spacing={2} >
-              <Tag size={'md'} variant="solid" colorScheme="orange" key={tag}>
-                {tag}
+              
+              <Tag borderRadius="full" variant="solid" direction={["column", "row"]} size={'lg'} colorScheme="orange" key={tag}>
+               
+                <TagLabel>{tag}</TagLabel>
               </Tag>
-             </HStack>
+             
+             
           
             ))}
-          </chakra.p>
+            </HStack>
+          </chakra.span>
         </Flex>
         <Link href="/users/[user]" as={`/users/${author.username}`}>
             <a>

@@ -29,7 +29,7 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 
-const Links = ['Dashboard', 'Projects', 'Team'];
+const Links = [];
 
 const NavLink = ({ children }, { children: ReactNode }) => (
   <Link
@@ -109,9 +109,8 @@ const Header = ({ className, ...props }) => {
                         My Account
                       </Link>
                     </MenuItem>
-                    <MenuItem onClick={() => logout()}>Logout</MenuItem>
                     <MenuDivider/>
-                    <MenuItem>Link 3</MenuItem>
+                    <MenuItem onClick={() => logout()}>Logout</MenuItem>
                   </MenuList>
                 </>
               ) : (

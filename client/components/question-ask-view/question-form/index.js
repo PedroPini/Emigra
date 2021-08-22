@@ -71,7 +71,7 @@ const QuestionForm = () => {
               onBlur={handleBlur}
               hasError={touched.title && errors.title}
               errorMessage={errors.title && errors.title}
-              placeholder="e.g Is there an R function for finding the index of an element in a vendor?"
+              placeholder="e.g What documents do I need to apply for a tourist visa to visit USA"
             />
             <Textarea
               label="Body"

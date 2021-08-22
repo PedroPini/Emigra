@@ -4,19 +4,19 @@ import Head from 'next/head'
 import QuestionAskView from '../../components/question-ask-view'
 import Header from '../../components/layout/header'
 import QuestionForm from '../../components/question-ask-view/question-form'
-
+import Layout from '../../components/layout'
 const Ask = () => {
   return (
-    <div>
+    <Layout>
       <Head>
-        <title>Ask a Question - Clone of Stackoverflow</title>
+        <title>Ask a Question</title>
       </Head>
 
       <Header />
       <QuestionAskView>
         <QuestionForm />
       </QuestionAskView>
-    </div>
+    </Layout>
   )
 }
 
