@@ -9,7 +9,7 @@ import ModalContext from '../../../store/modal';
 import { AuthContext } from '../../../store/auth';
 import { ColorModeSwitcher } from '../../color-mode-switch/index';
 import NavigationDropdown from '../../navigation-dropdown';
-import { Logo } from '../../icons';
+import { MenuIcon, Close, Logo } from '../../icons';
 import {
   Box,
   Flex,
@@ -27,7 +27,7 @@ import {
   useColorModeValue,
   Stack,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon, AddIcon, ExternalLinkIcon, RepeatIcon, EditIcon  } from '@chakra-ui/icons';
 
 const Links = [];
 
@@ -67,15 +67,17 @@ const Header = ({ className, ...props }) => {
 
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+        <div ref={toggleRef} >
           <IconButton
             size={'md'}
             icon={isOpen ? <CloseIcon/> : <HamburgerIcon/>}
             aria-label={'Open Menu'}
             display={{ md: !isOpen ? 'none' : 'inherit' }}
-            onClick={isOpen ? onClose : onOpen}
+            onClick={() => setIsComponentVisible((isOpen) => !isOpen)}
           />
+          </div>
           <HStack spacing={8} alignItems={'center'}>
-            <Box> <Logo/></Box>
+            <Box>  <Link href="/"><Logo/> </Link></Box>
             <HStack
               as={'nav'}
               spacing={4}
@@ -85,6 +87,7 @@ const Header = ({ className, ...props }) => {
               ))}
             </HStack>
           </HStack>
+          <div style={{ flex: 1 }}></div>
 
 
           <Flex alignItems={'center'}>
@@ -112,6 +115,7 @@ const Header = ({ className, ...props }) => {
                     <MenuDivider/>
                     <MenuItem onClick={() => logout()}>Logout</MenuItem>
                   </MenuList>
+                  
                 </>
               ) : (
                 <Stack
@@ -129,7 +133,6 @@ const Header = ({ className, ...props }) => {
                     Sign In
                   </Button>
                   <Button
-                    display={{ base: 'none', md: 'inline-flex' }}
                     fontSize={'sm'}
                     fontWeight={600}
                     color={'white'}
